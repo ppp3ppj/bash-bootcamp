@@ -8,6 +8,12 @@ if ! command -v curl &>/dev/null; then
   exit 1
 fi
 
+# Check if mise is already installed
+if command -v mise &>/dev/null; then
+  echo "mise is already installed ($(mise --version)). Skipping installation."
+  exit 0
+fi
+
 # Detect current shell and install + activate mise accordingly
 CURRENT_SHELL="$(basename "${SHELL:-}")"
 
