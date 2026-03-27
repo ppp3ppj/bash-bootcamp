@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+REPO="https://github.com/ppp3ppj/bash-bootcamp"
+DEST="$HOME/bash-bootcamp"
+
+if [ -d "$DEST" ]; then
+  echo "Updating existing repo at $DEST..."
+  git -C "$DEST" pull
+else
+  echo "Cloning $REPO into $DEST..."
+  git clone "$REPO" "$DEST"
+fi
+
+cd "$DEST"
+#DEV_ENV=$(pwd) ./run

@@ -2,6 +2,14 @@
 
 A simple script runner that executes all scripts in the `runs/` directory.
 
+## Quick start
+
+```bash
+curl -o- https://raw.githubusercontent.com/ppp3ppj/bash-bootcamp/main/setup | bash
+```
+
+This will clone the repo into `~/bash-bootcamp`, then run all scripts automatically.
+
 ## Usage
 
 ### Run all scripts
