@@ -6,35 +6,22 @@ if ! command -v curl &>/dev/null; then
   exit 1
 fi
 
-# Check if mise is already installed
-if command -v mise &>/dev/null; then
-  echo "mise is already installed ($(mise --version)). Skipping installation."
-  exit 0
+# Install mise if not already installed
+if ! command -v mise &>/dev/null && [[ ! -x "$HOME/.local/bin/mise" ]]; then
+  CURRENT_SHELL="$(basename "${SHELL:-bash}")"
+  case "${CURRENT_SHELL}" in
+    zsh)  curl https://mise.run/zsh | sh ;;
+    fish) curl https://mise.run/fish | sh ;;
+    *)    curl https://mise.run/bash | sh ;;
+  esac
 fi
 
-# Detect current shell and install + activate mise accordingly
-CURRENT_SHELL="$(basename "${SHELL:-}")"
+# Activate mise in the current process
+export PATH="$HOME/.local/bin:$PATH"
+eval "$("$HOME/.local/bin/mise" activate bash)"
 
-case "${CURRENT_SHELL}" in
-  zsh)
-    echo "Detected shell: zsh"
-    echo "Installing mise with zsh activation..."
-    curl https://mise.run/zsh | sh
-    ;;
-  bash)
-    echo "Detected shell: bash"
-    echo "Installing mise with bash activation..."
-    curl https://mise.run/bash | sh
-    ;;
-  fish)
-    echo "Detected shell: fish"
-    echo "Installing mise with fish activation..."
-    curl https://mise.run/fish | sh
-    ;;
-  *)
-    echo "Unknown shell '${CURRENT_SHELL}'. Falling back to generic install..."
-    curl https://mise.run | sh
-    ;;
-esac
+echo "mise $(mise --version)"
 
-echo "Done. Run 'mise --version' to verify the installation."
+mise use --global node@latest
+mise use --global ruby@latest
+mise exec ruby -- gem install rails

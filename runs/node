@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-source "$DEV_ENV/lib/mise.sh"
-require_mise
-
-mise use --global node@latest
