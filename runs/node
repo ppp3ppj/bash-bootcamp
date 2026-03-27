@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Check if mise is installed, skip if not
+if ! command -v mise &>/dev/null; then
+  echo "mise is not installed. Skipping node installation."
+  exit 0
+fi
+
+# Check if node is already installed via mise, skip if so
+if mise list node 2>/dev/null | grep -q node; then
+  echo "node is already installed. Skipping."
+  exit 0
+fi
+
+mise use --global node@latest
