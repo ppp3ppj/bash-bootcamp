@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+IMAGE="bash-bootcamp"
+
+docker build -t "$IMAGE" .
+docker run -it --rm "$IMAGE" bash
