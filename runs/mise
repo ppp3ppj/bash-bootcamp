@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Check curl is available
+if ! command -v curl &>/dev/null; then
+  echo "Error: curl is required but not installed." >&2
+  exit 1
+fi
+
+# Detect current shell and install + activate mise accordingly
+CURRENT_SHELL="$(basename "${SHELL:-}")"
+
+case "${CURRENT_SHELL}" in
+  zsh)
+    echo "Detected shell: zsh"
+    echo "Installing mise with zsh activation..."
+    curl https://mise.run/zsh | sh
+    ;;
+  bash)
+    echo "Detected shell: bash"
+    echo "Installing mise with bash activation..."
+    curl https://mise.run/bash | sh
+    ;;
+  fish)
+    echo "Detected shell: fish"
+    echo "Installing mise with fish activation..."
+    curl https://mise.run/fish | sh
+    ;;
+  *)
+    echo "Unknown shell '${CURRENT_SHELL}'. Falling back to generic install..."
+    curl https://mise.run | sh
+    ;;
+esac
+
+echo "Done. Run 'mise --version' to verify the installation."
