@@ -1,0 +1,40 @@
+# bash-bootcamp
+
+A simple script runner that executes all scripts in the `runs/` directory.
+
+## Usage
+
+### Run all scripts
+
+```bash
+DEV_ENV=$(pwd) ./run
+```
+
+### Run a custom script using a grep filter
+
+Only runs scripts whose filename matches the given string:
+
+```bash
+DEV_ENV=$(pwd) ./run keyboard
+```
+
+### Dry run
+
+Log what would happen without actually running anything:
+
+```bash
+DEV_ENV=$(pwd) ./run --dry
+```
+
+Dry run with a filter:
+
+```bash
+DEV_ENV=$(pwd) ./run keyboard --dry
+```
+
+## How it works
+
+- `DEV_ENV` must be set — it is exported and made available to all child scripts.
+- Scripts must be placed in the `runs/` directory and be **executable**.
+- An optional positional argument is used as a `grep` filter against script filenames.
+- `--dry` prints what would run without executing anything.
