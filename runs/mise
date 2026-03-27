@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 # Check curl is available
 if ! command -v curl &>/dev/null; then
   echo "Error: curl is required but not installed." >&2
