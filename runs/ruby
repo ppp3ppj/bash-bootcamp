@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 source "$DEV_ENV/lib/mise.sh"
+require_mise
 
-mise_install ruby
+mise use --global ruby@latest
 gem install rails

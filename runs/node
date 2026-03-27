@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 source "$DEV_ENV/lib/mise.sh"
+require_mise
 
-mise_install node
+mise use --global node@latest

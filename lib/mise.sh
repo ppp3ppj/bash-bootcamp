@@ -14,15 +14,3 @@ require_mise() {
     exit 0
   fi
 }
-
-mise_install() {
-  local pkg="$1"
-  require_mise
-
-  if mise list "$pkg" 2>/dev/null | grep -q "$pkg"; then
-    echo "$pkg is already installed. Skipping."
-    return 0
-  fi
-
-  mise use --global "${pkg}@latest"
-}
